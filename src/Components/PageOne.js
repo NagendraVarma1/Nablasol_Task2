@@ -1,9 +1,65 @@
+import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const PageOne = () => {
+  const [error, setError] = useState({});
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+  console.log(data);
+
+  const nextPageHandler = () => {
+    const validationError = {};
+
+    if (data.firstName.trim().length === 0) {
+      validationError.firstName = "Please Enter First Name";
+    }
+    if (data.lastName.trim().length === 0) {
+      validationError.lastName = "Please Enter Last Name";
+    }
+    if (data.email.trim().length === 0) {
+      validationError.email = "Please Enter Email";
+    }
+    if (data.phone.trim().length < 10) {
+      validationError.phone = "Please Enter valid Phone Number";
+    }
+    if (data.password.trim().length === 0) {
+      validationError.password = "Please Enter Password";
+    }
+    if (data.confirmPassword.trim().length === 0) {
+      validationError.confirmPassword = "Please Confirm Your Password";
+    } else if (data.password !== data.confirmPassword) {
+      validationError.confirmPassword = "Password Doesnt Match";
+    }
+
+    setError(validationError);
+  };
+  if (Object.keys(error).length === 0) {
+    localStorage.setItem("firstpage", JSON.stringify(data));
+  }
   return (
     <>
-      <h2 style={{ textAlign: "center", margin: "30px", fontWeight: 'bold', color: 'white' }}>
+      <h2
+        style={{
+          textAlign: "center",
+          margin: "30px",
+          fontWeight: "bold",
+          color: "white",
+        }}
+      >
         Create New Account
       </h2>
       <Container
@@ -18,7 +74,7 @@ const PageOne = () => {
             height: "60px",
             paddingTop: "20px",
             backgroundColor: "rgba(237,238,253,255)",
-            borderRadius: '5px'
+            borderRadius: "5px",
           }}
         >
           <p>Your Profile</p>
@@ -42,17 +98,31 @@ const PageOne = () => {
               <Form.Label>First Name*</Form.Label>
               <Form.Control
                 type="text"
+                name="firstName"
                 placeholder="Input your First Name"
+                onChange={changeHandler}
                 required
               />
+              {error.firstName && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.firstName}
+                </span>
+              )}
             </Col>
             <Col sm="6">
               <Form.Label>Last Name*</Form.Label>
               <Form.Control
                 type="text"
+                name="lastName"
                 placeholder="Input your Last Name"
+                onChange={changeHandler}
                 required
               />
+              {error.lastName && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.lastName}
+                </span>
+              )}
             </Col>
           </Form.Group>
 
@@ -61,18 +131,32 @@ const PageOne = () => {
               <Form.Label>Email*</Form.Label>
               <Form.Control
                 type="email"
+                name="email"
                 placeholder="Input your Email"
+                onChange={changeHandler}
                 required
               />
+              {error.email && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.email}
+                </span>
+              )}
             </Col>
             <Col sm="6">
               <Form.Label>Phone Number*</Form.Label>
               <Form.Control
                 type="tel"
                 pattern="[0-9]{10}"
+                name="phone"
                 placeholder="Input your Phone Number"
+                onChange={changeHandler}
                 required
               />
+              {error.phone && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.phone}
+                </span>
+              )}
             </Col>
           </Form.Group>
 
@@ -81,24 +165,38 @@ const PageOne = () => {
               <Form.Label>Password*</Form.Label>
               <Form.Control
                 type="password"
+                name="password"
                 placeholder="Create Password"
+                onChange={changeHandler}
                 required
               />
+              {error.password && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.password}
+                </span>
+              )}
             </Col>
             <Col sm="6">
               <Form.Label>Confirm Password*</Form.Label>
               <Form.Control
                 type="password"
+                name="confirmPassword"
                 placeholder="Confirm Your Password"
+                onChange={changeHandler}
                 required
               />
+              {error.confirmPassword && (
+                <span style={{ color: "red", fontSize: "small" }}>
+                  {error.confirmPassword}
+                </span>
+              )}
             </Col>
           </Form.Group>
         </Form>
       </Container>
       <Container style={{ display: "flex", justifyContent: "space-between" }}>
         <p>Back to Login</p>
-        <Button type="submit">Next Step</Button>
+        <Button onClick={nextPageHandler}>Next Step</Button>
       </Container>
     </>
   );
