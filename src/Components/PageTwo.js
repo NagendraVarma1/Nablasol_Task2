@@ -1,6 +1,8 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const PageTwo = () => {
+    const navigate = useNavigate()
     return (
         <>
       <h2
@@ -28,9 +30,9 @@ const PageTwo = () => {
             borderRadius: "5px",
           }}
         >
-          <p>Your Profile</p>
-          <p>Business Information</p>
-          <p>Additional Users</p>
+          <p style={{fontWeight: 'bold'}}>Your Profile</p>
+          <p style={{fontWeight: 'bold', color: 'rgba(112,118,228,255)' }}>Business Information</p>
+          <p style={{fontWeight: 'bold'}}>Additional Users</p>
         </div>
         <div
           style={{ textAlign: "center", width: "30%", marginLeft: "35%" }}
@@ -122,11 +124,7 @@ const PageTwo = () => {
         </Container>
         <Container style={{ display: "flex", justifyContent: "space-between", width: '70%'  }}>
         <p>Back to Login</p>
-        <div>
-        <Button>Previous Step</Button>
-        <Button style={{marginLeft: '10px'}}>Next Step</Button>
-        </div>
-        
+        <Button onClick={() => {navigate('/')}}>Previous Step</Button>
       </Container>
         </>
     )

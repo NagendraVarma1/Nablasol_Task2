@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const PageOne = () => {
   const [error, setError] = useState({});
@@ -11,6 +12,8 @@ const PageOne = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -46,10 +49,13 @@ const PageOne = () => {
     }
 
     setError(validationError);
+    if (Object.keys(validationError).length === 0) {
+        localStorage.setItem("firstpage", JSON.stringify(data));
+        navigate('/2')
+      }
+    
   };
-  if (Object.keys(error).length === 0) {
-    localStorage.setItem("firstpage", JSON.stringify(data));
-  }
+  
   return (
     <>
       <h2
@@ -77,9 +83,9 @@ const PageOne = () => {
             borderRadius: "5px",
           }}
         >
-          <p>Your Profile</p>
-          <p>Business Information</p>
-          <p>Additional Users</p>
+          <p style={{fontWeight: 'bold', color: 'rgba(112,118,228,255)' }}>Your Profile</p>
+          <p style={{fontWeight: 'bold'}}>Business Information</p>
+          <p style={{fontWeight: 'bold'}}>Additional Users</p>
         </div>
         <div
           style={{ textAlign: "center", width: "30%", marginLeft: "35%" }}
