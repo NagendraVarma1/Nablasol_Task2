@@ -1,5 +1,8 @@
 body {
   margin: 0;
+  background-image: url('https://imgs.search.brave.com/D0InOqjqc76rKjv1cCB-yQ-7GeJQ5yS28yYwUT8KGKE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9hYnN0cmFjdC03/My1iYWNrZ3JvdW5k/LXdhbGxwYXBlci1n/cmFkaWVudF83OTI4/MzYtMTY4MzI1Lmpw/Zz9zaXplPTYyNiZl/eHQ9anBn');
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+code { 
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
