@@ -22,7 +22,6 @@ const PageOne = () => {
       [name]: value,
     });
   };
-  console.log(data);
 
   const nextPageHandler = () => {
     const validationError = {};
