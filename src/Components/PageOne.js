@@ -49,6 +49,7 @@ const PageOne = () => {
 
     setError(validationError);
     if (Object.keys(validationError).length === 0) {
+      //It stores the first page data in the local storage if there are no errors
         localStorage.setItem("firstpage", JSON.stringify(data));
         navigate('/2')
       }

@@ -55,6 +55,7 @@ const PageTwo = () => {
 
     setError(validationError);
     if (Object.keys(validationError).length === 0) {
+      //It stores the second page data in the local storage if there are no errors
       localStorage.setItem("secondpage", JSON.stringify(data));
       navigate("/");
     }
