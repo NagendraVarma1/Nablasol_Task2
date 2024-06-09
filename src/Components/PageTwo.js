@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const PageTwo = () => {
   const [error, setError] = useState({});
+  const [over, setOver] = useState(false);
   const [data, setData] = useState({
     brandName: "",
     brandType: "",
@@ -14,16 +15,13 @@ const PageTwo = () => {
   });
   const navigate = useNavigate();
 
-  const toolTip = document.getElementById('toolTip')
-
   const mouseOverHandler = () => {
-    toolTip.style.display = 'inline'
-  }
+    setOver(true);
+  };
 
   const mouseOutHandler = () => {
-    toolTip.style.display = 'none'
-  }
-
+    setOver(false);
+  };
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -152,16 +150,32 @@ const PageTwo = () => {
               </span>
               <div
                 id="toolTip"
-                style={{
-                  display: "none",
-                  position: "absolute",
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "black",
-                  left: "130px",
-                  top: "1px",
-                }}
-              ></div>
+                style={
+                  over
+                    ? {
+                        display: "inline",
+                        position: "absolute",
+                        width: '450px',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        backgroundColor: "rgba(88,104,142,95%)",
+                        left: "130px",
+                        top: "1px",
+                      }
+                    : {
+                        display: "none",
+                      }
+                }
+              >
+                <p style={{color: 'white'}}>
+                  Local: Brands with distribution in 3 divisions or less Or
+                  multiple divisions but a total of 150 stores or less
+                </p>
+                <p style={{color: 'white'}}>
+                  National: Brands with distribution in 4 or more divisions or
+                  in more thatn 150 stores
+                </p>
+              </div>
               <Form.Control
                 size="sm"
                 type="text"
